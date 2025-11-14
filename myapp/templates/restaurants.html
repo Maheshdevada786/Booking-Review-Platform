@@ -1,0 +1,97 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Restaurants — Booking Review</title>
+    <link rel="stylesheet" href="{% static 'css/restaurants.css' %}" />
+  </head>
+  <body>
+    <div class="top-nav">
+      <a href="{% url 'myapp:home' %}" class="nav-btn">🏠 Home</a>
+      <a href="{% url 'myapp:reviews' %}" class="nav-btn">💬 Reviews</a>
+      <a href="{% url 'myapp:about' %}" class="nav-btn">📘 About Us</a>
+    </div>
+    <br />
+    <div class="container">
+      <h1>Siddharth Restaurants PVT LTD</h1>
+      <div class="add-button-wrapper">
+        <a href="{% url 'myapp:add_restaurant' %}" class="btn add"
+          >Add New Restaurant</a
+        >
+      </div>
+
+      <!-- FILTER + SEARCH SECTION (Separate Container - Does NOT disturb original code) -->
+      <div class="filter-search-container">
+        <form method="GET" class="filter-search-form">
+          <!-- Search Input -->
+          <input
+            type="text"
+            name="search"
+            placeholder="Search by name..."
+            value="{{ request.GET.search }}"
+            class="search-input"
+          />
+
+          <!-- Rating Filter Input -->
+          <input
+            type="number"
+            name="rating"
+            min="1"
+            max="10"
+            placeholder="Review score ≥ ?"
+            value="{{ request.GET.rating }}"
+            class="rating-input"
+          />
+
+          <!-- Buttons -->
+          <button type="submit" class="btn search-btn">Search</button>
+          <button type="submit" class="btn filter-btn">Filter</button>
+        </form>
+      </div>
+
+      <div class="grid">
+        {% for restaurant in restaurants %}
+        <div class="card">
+          {% if restaurant.image %}
+          <img src="{{ restaurant.image.url }}" alt="{{ restaurant.name }}" />
+          {% endif %}
+          <h2>{{ restaurant.name }}</h2>
+          <p>{{ restaurant.description }}</p>
+          <p class="review">⭐ {{ restaurant.review_score }}</p>
+          <a href="{% url 'myapp:booking_create'  %}" class="btn book">Book Now</a>
+          <a href="{% url 'myapp:review_create'  %}" class="btn review">📝 Review Now</a>
+          <a href="{% url 'myapp:update_restaurant' restaurant.pk %}" class="btn update">Update</a>
+          <a href="{% url 'myapp:delete_restaurant' restaurant.pk %}" class="btn delete">Delete</a>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- Reference Videos Section -->
+    <div class="video-section">
+      <h2>Learn More About Our Restaurants</h2>
+      <div class="video-grid">
+        <div class="video-card">
+          <h3>Restaurant Experience Overview</h3>
+          <video controls poster="{% static 'images/video1_thumb.jpg' %}">
+            <source
+              src="{% static 'videos/resvideo1.mp4' %}"
+              type="video/mp4"/>
+            Your browser does not support the video tag.
+          </video>
+        </div>
+        <div class="video-card">
+          <h3>Behind the Scenes Tour</h3>
+          <video controls poster="{% static 'images/video2_thumb.jpg' %}">
+            <source
+              src="{% static 'videos/resvideo2.mp4' %}"
+              type="video/mp4"/>
+            Your browser does not support the video tag.
+          </video>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

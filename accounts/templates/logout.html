@@ -1,0 +1,36 @@
+
+{% load static %}
+
+{% block content %}
+<div class="logout-container">
+  <h2>You have been logged out successfully.</h2>
+  <p>Thank you for visiting your profile!</p>
+  <a href="{% url 'home' %}" class="btn btn-primary">Return to Home Page</a>
+</div>
+
+<style>
+.logout-container {
+  max-width: 600px;
+  margin: 100px auto;
+  text-align: center;
+  background: #fff;
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+.logout-container h2 {
+  color: #333;
+  margin-bottom: 15px;
+}
+.logout-container .btn {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 25px;
+  border-radius: 8px;
+  text-decoration: none;
+}
+.logout-container .btn:hover {
+  background-color: #0056b3;
+}
+</style>
+{% endblock %}

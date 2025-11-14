@@ -1,0 +1,96 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Hotels — Booking Review</title>
+    <link rel="stylesheet" href="{% static 'css/hotels.css' %}" />
+  </head>
+  <body>
+    <div class="top-nav">
+      <a href="{% url 'myapp:home' %}" class="nav-btn">🏠 Home</a>
+      <a href="{% url 'myapp:reviews' %}" class="nav-btn">💬 Reviews</a>
+      <a href="{% url 'myapp:about' %}" class="nav-btn">📘 About Us</a>
+    </div>
+
+    <div class="container">
+      <h1>Jagadeesh Hotels PVT LTD</h1>
+      <div class="add-button-wrapper">
+        <a href="{% url 'myapp:add_hotel' %}" class="btn add">Add New Hotel</a>
+      </div>
+
+      <!-- FILTER + SEARCH SECTION (Separate Container - Does NOT disturb original code) -->
+      <div class="filter-search-container">
+        <form method="GET" class="filter-search-form">
+          <!-- Search Input -->
+          <input
+            type="text"
+            name="search"
+            placeholder="Search by name..."
+            value="{{ request.GET.search }}"
+            class="search-input"
+          />
+
+          <!-- Rating Filter Input -->
+          <input
+            type="number"
+            name="rating"
+            min="1"
+            max="10"
+            placeholder="Review score ≥ ?"
+            value="{{ request.GET.rating }}"
+            class="rating-input"
+          />
+
+          <!-- Buttons -->
+          <button type="submit" class="btn search-btn">Search</button>
+          <button type="submit" class="btn filter-btn">Filter</button>
+        </form>
+      </div>
+
+      <div class="grid">
+        {% for hotel in hotels %}
+        <div class="card">
+          {% if hotel.image %}
+          <img src="{{ hotel.image.url }}" alt="{{ hotel.name }}" />
+          {% endif %}
+          <h2>{{ hotel.name }}</h2>
+          <p>{{ hotel.description }}</p>
+          <p class="review">⭐ {{ hotel.review_score }}</p>
+          <a href="{% url 'myapp:booking_create'  %}" class="btn book">Book Now</a>
+          <a href="{% url 'myapp:review_create'  %}" class="btn review">📝 Review Now</a>
+          <a href="{% url 'myapp:update_hotel' hotel.pk %}" class="btn update">Update</a>
+          <a href="{% url 'myapp:delete_hotel' hotel.pk %}" class="btn delete">Delete</a>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    <!-- Reference Videos Section -->
+    <div class="video-section">
+      <h2>Learn More About Our Hotels</h2>
+      <div class="video-grid">
+        <div class="video-card">
+          <h3>Hotel Experience Overview</h3>
+          <video controls poster="{% static 'images/video1_thumb.jpg' %}">
+            <source
+              src="{% static 'videos/hotelvideo1.mp4' %}"
+              type="video/mp4"
+            />
+            Your browser does not support the video tag.
+          </video>
+        </div>
+        <div class="video-card">
+          <h3>Behind the Scenes Tour</h3>
+          <video controls poster="{% static 'images/video2_thumb.jpg' %}">
+            <source
+              src="{% static 'videos/hotelvideo2.mp4' %}"
+              type="video/mp4"
+            />
+            Your browser does not support the video tag.
+          </video>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,22 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Delete Restaurant</title>
+    <link rel="stylesheet" href="{% static 'css/restaurant_form.css' %}" />
+  </head>
+  <body>
+    <div class="form-container">
+      <h2>Confirm Deletion</h2>
+      <p>
+        Are you sure you want to delete <strong>{{ restaurant.name }}</strong>?
+      </p>
+      <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="danger">Yes, Delete</button>
+      </form>
+      <a href="{% url 'myapp:restaurants' %}" class="back-link">← Cancel</a>
+    </div>
+  </body>
+</html>

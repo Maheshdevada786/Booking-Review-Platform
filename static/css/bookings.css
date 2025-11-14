@@ -1,0 +1,113 @@
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(to right, #e0f7fa, #f8f9fa);
+    margin: 0;
+    padding: 0;
+}
+
+.dashboard {
+    max-width: 1000px;
+    margin: auto;
+    padding: 40px 20px;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(12px);
+    border-radius: 15px;
+    box-shadow: 0 0 30px rgba(0,0,0,0.1);
+}
+
+h1 {
+    text-align: center;
+    color: #00796b;
+    margin-bottom: 30px;
+}
+
+.btn {
+    padding: 8px 14px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+    color: white;
+    transition: background 0.3s ease;
+}
+
+.btn.add {
+    background-color: #4caf50;
+    display: block;
+    width: fit-content;
+    margin: 0 auto 20px auto;
+}
+
+.btn.update {
+    background-color: #2196f3;
+    margin-right: 5px;
+}
+
+.btn.delete {
+    background-color: #f44336;
+}
+
+.btn:hover {
+    opacity: 0.9;
+}
+
+.table-wrapper {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+th, td {
+    padding: 14px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #00bcd4;
+    color: white;
+}
+
+.status {
+    font-weight: bold;
+    color: #388e3c;
+}
+
+.add-button-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.top-nav {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    display: flex;
+    gap: 15px;
+    z-index: 1000;
+}
+
+.nav-btn {
+    background: linear-gradient(to right, #00c6ff, #0072ff);
+    color: white;
+    padding: 10px 16px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 14px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    transition: transform 0.2s ease, background 0.3s ease;
+}
+
+.nav-btn:hover {
+    transform: scale(1.05);
+    background: linear-gradient(to right, #0072ff, #00c6ff);
+}
+

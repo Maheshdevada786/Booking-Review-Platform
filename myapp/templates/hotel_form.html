@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>{{ action }}</title>
+    <link rel="stylesheet" href="{% static 'css/hotel_form.css' %}" />
+  </head>
+  <body>
+    <div class="form-container">
+      <h2>{{ action }}</h2>
+      <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="input-group">{{ form.name.label_tag }} {{ form.name }}</div>
+        <div class="input-group">
+          {{ form.description.label_tag }} {{ form.description }}
+        </div>
+        <div class="input-group">
+          {{ form.review_score.label_tag }} {{ form.review_score }}
+        </div>
+        <div class="input-group">
+          {{ form.image.label_tag }} {{ form.image }}
+        </div>
+        <button type="submit">{{ action }}</button>
+      </form>
+      <a href="{% url 'myapp:hotels' %}" class="back-link">← Back to Hotels</a>
+    </div>
+  </body>
+</html>

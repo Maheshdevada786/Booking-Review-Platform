@@ -1,0 +1,231 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Mahesh Booking Review Platform</title>
+    <link rel="stylesheet" href="{% static 'css/home.css' %}" />
+  </head>
+
+  <body>
+    
+    <div class="background"></div>
+
+    <header class="header">
+      <div class="logo-container">
+        <img src="{% static 'images/logo.png' %}" alt="Logo" class="logo" />
+        <span class="brand-name">MyBrand</span>
+      </div>
+
+      <div class="nav-actions">   
+        <a href="{% url 'myapp:about' %}" class="about-btn">About Us</a>
+        
+        {% if user.is_authenticated %}
+        <div class="profile-menu">
+          <button class="profile-btn" id="profileBtn">
+            <div class="profile-img-wrapper">
+              <img src="{% static 'images/profile_default.jpg' %}" alt="Profile" class="profile-img" />
+            </div>
+            <span class="profile-name">{{ user.username }}</span>
+            <span class="arrow">▾</span>
+          </button>
+
+          <div class="dropdown">
+            <a href="{% url 'accounts:profile' %}">Profile</a>
+            <a href="#">Settings</a>
+            <a href="{% url 'myapp:home' %}">Logout</a>
+            </form>
+          </div>
+        </div>
+        {% else %}
+        <a href="{% url 'accounts:login' %}" class="login-btn">Login</a>
+        {% endif %}
+      </div>
+    </header>
+
+    <section class="hero-section">
+      <div class="hero-text">
+        <h1 class="hero-title typewriter" id="typewriter-text"></h1>
+        <p class="hero-subtitle">Your trusted hub for booking insights and reviews. Smart bookings start with real reviews</p><br>
+        <a href="{% url 'myapp:home' %}" class="btn">Get Started</a>
+      </div>
+    </section>
+
+    <section class="services">
+      <h2 class="section-heading">Our Amazing Services</h2>
+      <div class="service-boxes">
+        <a href="{% url 'myapp:hotels' %}" class="service-box">
+          <img src="{% static 'images/hotel7.jpg' %}" alt="Hotels" />
+          <h3>Hotels</h3>
+        </a>
+        <a href="{% url 'myapp:malls' %}" class="service-box">
+          <img src="{% static 'images/mall6.jpg' %}" alt="Malls" />
+          <h3>Malls</h3>
+        </a>
+        <a href="{% url 'myapp:restaurants' %}" class="service-box">
+          <img src="{% static 'images/res10.jpg' %}" alt="Restaurants" />
+          <h3>Restaurants</h3>
+        </a>
+      </div>
+    </section>
+
+    <section class="split-section bookings-section">
+      <div class="split-image">
+        <div class="slideshow-container booking-slideshow">
+          <img src="{% static 'images/hotel7.jpg' %}" class="slide active" />
+          <img src="{% static 'images/hotel9.jpg' %}" class="slide" />
+          <img src="{% static 'images/mall4.jpg' %}" class="slide" />
+        </div>
+      </div>
+      <div class="split-content">
+        <h2>About Our Bookings</h2>
+        <p>
+          Experience seamless, fast, and secure bookings for your favorite hotels,
+          malls, and restaurants. Get verified listings and exclusive offers with ease.
+        </p>
+        <a href="{% url 'myapp:bookings' %}" class="btn">Explore Bookings</a>
+      </div>
+    </section>
+
+    <section class="split-section reviews-section">
+      <div class="split-content">
+        <h2>Customer Reviews</h2>
+        <p>
+          See what our happy users are saying. Honest feedback from real customers
+          to help you make the best choices. Share your own experience too!
+        </p>
+        <a href="{% url 'myapp:reviews' %}" class="btn">View Reviews</a>
+      </div>
+      <div class="split-image">
+        <div class="slideshow-container reviews-slideshow">
+          <img src="{% static 'images/res5.jpg' %}" class="slide active" />
+          <img src="{% static 'images/res10.jpg' %}" class="slide" />
+          <img src="{% static 'images/hotel9.jpg' %}" class="slide" />
+        </div>
+      </div>
+    </section>
+
+    <div class="feedback-btn" id="openFeedback">Feedback 💬</div>
+
+    <div class="feedback-popup" id="feedbackBox">
+        <textarea id="feedbackInput" placeholder="Write your feedback..."></textarea>
+        <button id="sendBtn">Send</button>
+    </div>
+
+    <footer class="footer">
+      <p>© 2025 Mahesh | All Rights Reserved</p>
+    </footer>
+
+    <script>
+      function makeSlideshow(selector, interval = 3000) {
+        const container = document.querySelector(selector);
+        const slides = container.querySelectorAll(".slide");
+        let index = 0;
+        let paused = false;
+        container.addEventListener("mouseenter", () => (paused = true));
+        container.addEventListener("mouseleave", () => (paused = false));
+        setInterval(() => {
+          if (!paused) {
+            slides[index].classList.remove("active");
+            index = (index + 1) % slides.length;
+            slides[index].classList.add("active");
+          }
+        }, interval);
+      }
+      makeSlideshow(".booking-slideshow");
+      makeSlideshow(".reviews-slideshow");
+
+      const text = "Mahesh Booking Review Platform";
+      const target = document.getElementById("typewriter-text");
+      let i = 0;
+      function typeEffect() {
+        if (i < text.length) {
+          target.textContent += text.charAt(i);
+          i++;
+          setTimeout(typeEffect, 100);
+        } else {
+          target.classList.add("cursor-done");
+        }
+      }
+      document.addEventListener("DOMContentLoaded", typeEffect);
+
+      const profileBtn = document.getElementById("profileBtn");
+      const dropdown = document.querySelector(".dropdown");
+
+      if (profileBtn) {
+        profileBtn.addEventListener("click", () => {
+          dropdown.classList.toggle("show");
+        });
+        window.addEventListener("click", (e) => {
+          if (!profileBtn.contains(e.target)) dropdown.classList.remove("show");
+        });
+      }
+
+      // Feedback popup functionality
+
+      const openBtn = document.getElementById("openFeedback");
+      const popup = document.getElementById("feedbackBox");  // updated
+      const feedbackInput = document.getElementById("feedbackInput");
+      
+      let isOpen = false;
+      
+      // OPEN & CLOSE on button click
+      openBtn.onclick = () => {
+          if (!isOpen) {
+              popup.style.display = "block";
+              popup.style.animation = "fadeIn 0.3s forwards";
+              isOpen = true;
+          } else {
+              popup.style.animation = "fadeOut 0.3s forwards";
+              setTimeout(() => popup.style.display = "none", 300);
+              isOpen = false;
+          }
+      };
+      
+      // CLOSE when clicking outside popup
+      document.addEventListener("click", (e) => {
+          if (isOpen && !popup.contains(e.target) && e.target !== openBtn) {
+              popup.style.animation = "fadeOut 0.3s forwards";
+              setTimeout(() => popup.style.display = "none", 300);
+              isOpen = false;
+          }
+      });
+      
+       
+        //
+
+      document.getElementById("sendBtn").onclick = () => {
+          const msg = document.getElementById("feedbackInput").value.trim();
+          if(msg === "") {
+              alert("Please enter feedback!");
+              return;
+          }
+      
+          // Your WhatsApp number (with country code but no +)
+          const phone = "+917032405162";
+      
+          const whatsappURL = `https://wa.me/${phone}?text=${encodeURIComponent(msg)}`;
+          window.open(whatsappURL, '_blank');
+      };
+  
+        // Alternative Email feedback functionality
+
+      {% comment %} document.getElementById("sendBtn").onclick = () => {
+          const msg = document.getElementById("feedbackInput").value.trim();
+          if (!msg) {
+              alert("Please type your feedback before sending!");
+              return;
+          }
+
+          const email = "vedasbharatindia118@gmail.com";
+          const subject = "New User Feedback";
+
+          const mailURL =
+              `https://mail.google.com/mail/?view=cm&fs=1&to=${email}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(msg)}`;
+
+          window.open(mailURL, '_blank');
+      }; {% endcomment %}
+
+    </script>
+  </body>
+</html>

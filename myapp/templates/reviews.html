@@ -1,0 +1,52 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Reviews List</title>
+    <link rel="stylesheet" href="{% static 'css/reviews.css' %}" />
+  </head>
+  <body>
+    <br />
+    <div class="top-nav">
+      <a href="{% url 'myapp:home' %}" class="nav-btn">🏠 Home</a>
+      <a href="{% url 'myapp:about' %}" class="nav-btn">📘 About Us</a>
+    </div>
+    <br />
+    <div class="container">
+      <h1>💬 Customer Reviews</h1>
+      <div class="add-button-wrapper">
+        <a href="{% url 'myapp:review_create' %}" class="btn add"
+          >➕ Add Review</a
+        >
+      </div>
+      <div class="grid">
+        {% for review in reviews %}
+        <div class="card">
+          <h2>{{ review.name }}</h2>
+          <p><strong>Category:</strong> {{ review.category }}</p>
+          <p><strong>Rating:</strong> ⭐ {{ review.rating }}</p>
+          <p><strong>Comment:</strong> {{ review.comment|truncatewords:20 }}</p>
+          <div class="actions">
+            <a
+              href="{% url 'myapp:review_update' review.pk %}"
+              class="btn update"
+              >✏️ Edit</a
+            >
+            <a
+              href="{% url 'myapp:review_delete' review.pk %}"
+              class="btn delete"
+              >🗑️ Delete</a
+            >
+          </div>
+        </div>
+        {% empty %}
+        <div class="centered-box">
+          <span class="icon">💬</span>
+          <h2>No Reviews Available</h2>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </body>
+</html>

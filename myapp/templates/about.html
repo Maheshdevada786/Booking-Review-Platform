@@ -1,0 +1,52 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>About — Booking Review</title>
+    <link rel="stylesheet" href="{% static 'css/about.css' %}" />
+  </head>
+  <body>
+    <div class="card about-wrapper">
+      <div class="about-box">
+        <h1>🌐 About Our Community</h1>
+        <p class="intro">
+          Welcome to BookingReview Community — your unified platform for
+          discovering, booking, and reviewing hotels, restaurants, and malls. We
+          believe in seamless experiences, modern design, and empowering users
+          to share their voice.
+        </p>
+
+        <div class="section">
+          <h2>🚀 Our Mission</h2>
+          <p>
+            To connect people with places they love through intuitive booking
+            tools and honest reviews. We aim to simplify decision-making with
+            elegant dashboards and transparent feedback.
+          </p>
+        </div>
+
+        <div class="section">
+          <h2>👨‍💻 Meet the Creator</h2>
+          <p>
+            This project is built by <strong>Mahesh</strong>, a passionate
+            developer blending advanced Django architecture with creative UI/UX.
+            From floating labels to glassmorphism, every detail is crafted with
+            care.
+          </p>
+        </div>
+
+        <div class="section">
+          <h2>📬 Contact Us</h2>
+          <p>
+            Have feedback or ideas? Reach out via our contact form or connect
+            with us on social media.
+          </p>
+        </div>
+
+        <a href="{% url 'myapp:home' %}" class="btn">← Back to Home</a>
+      </div>
+    </div>
+  </body>
+</html>

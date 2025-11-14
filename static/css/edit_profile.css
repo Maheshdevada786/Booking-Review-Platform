@@ -1,0 +1,102 @@
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(to right, #141e30, #243b55);
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.edit-container {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(12px);
+    border-radius: 15px;
+    padding: 40px;
+    width: 400px;
+    box-shadow: 0 0 30px rgba(0,0,0,0.5);
+    color: #fff;
+    text-align: center;
+}
+
+.edit-container h2 {
+    margin-bottom: 20px;
+    color: #00ffff;
+}
+
+.input-group {
+    position: relative;
+    margin-bottom: 25px;
+}
+
+.input-group input,
+.input-group textarea {
+    width: 100%;
+    padding: 10px;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid #00ffff;
+    color: #fff;
+    font-size: 16px;
+    outline: none;
+}
+
+.input-group label {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    color: #aaa;
+    font-size: 14px;
+    pointer-events: none;
+    transition: 0.3s ease;
+}
+
+.input-group input:focus + label,
+.input-group input:not(:placeholder-shown) + label,
+.input-group textarea:focus + label,
+.input-group textarea:not(:placeholder-shown) + label {
+    top: -15px;
+    left: 5px;
+    font-size: 12px;
+    color: #00ffff;
+}
+
+.file-upload {
+    margin-bottom: 20px;
+    text-align: left;
+    color: #ccc;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #00ffff;
+    color: #000;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+button:hover {
+    background-color: #00cccc;
+}
+
+button.danger {
+    background-color: #ff4d4d;
+    color: #fff;
+}
+
+button.danger:hover {
+    background-color: #cc0000;
+}
+
+.back-link {
+    display: block;
+    margin-top: 20px;
+    color: #00ffff;
+    text-decoration: none;
+    font-size: 14px;
+}

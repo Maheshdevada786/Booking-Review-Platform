@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Profile — {{ user.username }}</title>
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}" />
+  </head>
+  <body>
+    <div>
+      <a href="{% url 'myapp:home' %}" class="home-button"><span>🏠 Home</span></a>
+    </div>
+    <div class="card profile-container">
+      <div class="profile-card">
+        <img
+          src="{% if user.profile_pic %}{{ user.profile_pic.url }}{% else %}{% static 'images/profile_default.jpg' %}{% endif %}"
+          alt="Profile Picture"/>
+        <h2>{{ user.username }}</h2>
+        <p class="email">{{ user.email }}</p>
+        <p class="bio">{{ user.bio|default:" By Default - Bio is written" }}</p>
+        <div class="actions">
+          <a href="{% url 'accounts:edit_profile' %}" class="btn edit">Edit Profile</a>
+          <a href="{% url 'accounts:delete_profile' %}" class="btn delete">Delete Account</a>
+          <form method="post" action="{% url 'accounts:logout' %}" style="display: inline">
+            {% csrf_token %}
+            <button type="submit" class="btn logout">Logout</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

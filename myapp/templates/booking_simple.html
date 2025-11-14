@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="{% static 'css/booking_form.css' %}" />
+  </head>
+  <body>
+    <div class="form-container">
+      <h2>{{ title }}</h2>
+      <form method="post">
+        {% csrf_token %}
+        <div>{{ form.name.label_tag }}</div>
+        <div>{{ form.name }}</div>
+        {% if form.name.errors %}
+        <div class="field-error">{{ form.name.errors }}</div>
+        {% endif %}
+        <div>{{ form.category.label_tag }}</div>
+        <div>{{ form.category }}</div>
+        {% if form.category.errors %}
+        <div class="field-error">{{ form.category.errors }}</div>
+        {% endif %}
+        <div>{{ form.date.label_tag }}</div>
+        <div>{{ form.date }}</div>
+        {% if form.date.errors %}
+        <div class="field-error">{{ form.date.errors }}</div>
+        {% endif %}
+        <div>{{ form.status.label_tag }}</div>
+        <div>{{ form.status }}</div>
+        {% if form.status.errors %}
+        <div class="field-error">{{ form.status.errors }}</div>
+        {% endif %}
+        <button type="submit" class="btn submit">Submit</button>
+      </form>
+      <a href="{% url 'myapp:bookings' %}" class="btn back">Back to Bookings</a>
+    </div>
+  </body>
+</html>

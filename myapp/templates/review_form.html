@@ -1,0 +1,30 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{{ title }} — Booking Review</title>
+    <link rel="stylesheet" href="{% static 'css/review_form.css' %}" />
+  </head>
+  <body>
+    <div class="card form-container">
+      <h2>{{ title }}</h2>
+      <form method="post">
+        {% csrf_token %}
+        <div class="input-group">{{ form.name.label_tag }} {{ form.name }}</div>
+        <div class="input-group">
+          {{ form.category.label_tag }} {{ form.category }}
+        </div>
+        <div class="input-group">
+          {{ form.rating.label_tag }} {{ form.rating }}
+        </div>
+        <div class="input-group">
+          {{ form.comment.label_tag }} {{ form.comment }}
+        </div>
+        <button type="submit" class="btn submit">✅ Submit Review</button>
+      </form>
+      <a href="{% url 'myapp:reviews' %}" class="btn back">← Back to Review List</a>
+    </div>
+  </body>
+</html>

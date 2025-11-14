@@ -1,0 +1,25 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Delete Review — Booking Review</title>
+    <link rel="stylesheet" href="{% static 'css/review_delete.css' %}" />
+  </head>
+  <body>
+    <div class="card delete-container">
+      <h2>🗑️ Confirm Review Deletion</h2>
+      <p>
+        Are you sure you want to delete the review for
+        <strong>{{ review.name }}</strong> in
+        <strong>{{ review.category }}</strong>?
+      </p>
+      <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn delete">Yes, Delete</button>
+      </form>
+      <a href="{% url 'myapp:reviews' %}" class="btn back">← Back to Review List</a>
+    </div>
+  </body>
+</html>

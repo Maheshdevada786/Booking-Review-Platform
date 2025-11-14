@@ -1,0 +1,55 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Bookings — Booking Review</title>
+    <link rel="stylesheet" href="{% static 'css/bookings.css' %}" />
+  </head>
+  <body>
+    <br />
+    <div class="top-nav">
+      <a href="{% url 'myapp:home' %}" class="nav-btn">🏠 Home</a>
+      <a href="{% url 'myapp:about' %}" class="nav-btn">📘 About Us</a>
+    </div>
+    <br />
+    <div class="dashboard card">
+      <h1>Bookings</h1>
+      <div class="add-button-wrapper">
+        <a href="{% url 'myapp:booking_create' %}" class="btn add" >➕ Add Booking</a>
+      </div>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Category</th>
+              <th>Date</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for booking in bookings %}
+            <tr>
+              <td>{{ booking.name }}</td>
+              <td>{{ booking.category }}</td>
+              <td>{{ booking.date }}</td>
+              <td><span class="status">{{ booking.status }}</span></td>
+              <td>
+                <a href="{% url 'myapp:booking_update' booking.pk %}"  class="btn update" >✏️</a>
+                <a href="{% url 'myapp:booking_delete' booking.pk %}" class="btn delete" >🗑️</a >
+              </td>
+            </tr>
+            {% empty %}
+            <tr>
+              <td colspan="5">No bookings found.</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

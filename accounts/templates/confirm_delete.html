@@ -1,0 +1,26 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Confirm Delete — {{ user.username }}</title>
+    <link rel="stylesheet" href="{% static 'css/edit_profile.css' %}" />
+  </head>
+  <body>
+    <div class="card edit-container">
+      <h2>Confirm Account Deletion</h2>
+      <p>
+        Are you sure you want to delete your account? This action cannot be
+        undone.
+      </p>
+      <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="danger btn">Yes, Delete My Account</button>
+      </form>
+      <a href="{% url 'accounts:profile' %}" class="back-link"
+        >← Cancel and Go Back</a
+      >
+    </div>
+  </body>
+</html>
