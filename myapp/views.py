@@ -5,7 +5,7 @@ from .forms import HotelForm, RestaurantForm, MallForm, BookingForm, ReviewForm
 
 
 def home(request):
-    return render(request, 'home.html')
+    return render(request, 'index.html')
 
 
 def hotels(request):
